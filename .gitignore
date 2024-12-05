@@ -23,3 +23,9 @@ Homestead.json
 .phpunit.result.cache
 
 kustomization.yaml
+
+/.fleet
+/.idea
+/.nova
+/.vscode
+/.zed

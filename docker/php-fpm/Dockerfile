@@ -67,6 +67,9 @@ RUN apk add nodejs
 RUN apk add npm
 RUN npm install -g gulp-cli
 
+RUN apk add bash
+RUN apk add nano
+
 HEALTHCHECK CMD /usr/local/bin/healthcheck
 
 FROM php-base AS debug
