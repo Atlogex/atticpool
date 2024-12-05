@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+
+  db:
+    image: postgres
+    container_name: pdl_pgdb
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: pduser
+      POSTGRES_PASSWORD: keyfordb
+      POSTGRES_DB: propyth
+      PGDATA: /tmp
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  webserver:
+    image: nginx:alpine
+    container_name: atlogex-webserver-1
+    working_dir: /var/apl
+    volumes:
+      - ./public_html/:/var/apl
+      - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf/
+    ports:
+      - "80:80"
+    depends_on:
+      - mysql
+      - php-fpm
+
+volumes:
+  my-data:
+  pgdata:
