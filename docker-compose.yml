@@ -13,11 +13,11 @@ services:
 
   balancer:
     image: nginx:alpine
-    working_dir: /var/apl
+    working_dir: /app
     depends_on:
       - php-fpm
     volumes:
-      - ./src/:/var/apl/
+      - ./src/:/app/
       - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
     ports:
       - "80:80"
@@ -27,11 +27,13 @@ services:
       context: docker/php-fpm/
       target: debug
     restart: always
-    working_dir: /var/apl
+    working_dir: /app
     volumes:
-      - ./src:/var/apl
+      - ./src:/app
     environment:
       PHP_IDE_CONFIG: "serverName=atticpool.lc"
+    extra_hosts:
+      - host.docker.internal:host-gateway
 
   # Admin Panels
   adminer:
