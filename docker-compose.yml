@@ -25,10 +25,13 @@ services:
   php-fpm:
     build:
       context: docker/php-fpm/
+      target: debug
     restart: always
     working_dir: /var/apl
     volumes:
       - ./src:/var/apl
+    environment:
+      PHP_IDE_CONFIG: "serverName=atticpool.lc"
 
   # Admin Panels
   adminer:
